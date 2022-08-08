@@ -35,3 +35,22 @@ function insert(array $data): int
 
     return (int)$dbh->lastInsertId();
 }
+
+function render(string $path, array $data = [])
+{
+    if (is_array($data)) {
+        extract($data);
+    }
+
+    $viewpath = __DIR__ . "/../views/{$path}.php";
+
+    ob_start();
+    if (!file_exists($viewpath)) {
+        http_response_code(404);
+        require __DIR__ . '/../views/4040.php';
+        die;
+    }
+
+    require $viewpath;
+    return ob_get_clean();
+}
