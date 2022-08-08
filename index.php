@@ -46,3 +46,7 @@ if (empty($action)) {
     require __DIR__ . '/views/404.php';
     die;
 }
+
+$massages = require __DIR__ . '/config/massages.php';
+require __DIR__ . "/actions/{$action}.php";
+require __DIR__ . '/views/layouts/default.php'; //Подтягивание вёрстки
