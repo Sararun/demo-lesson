@@ -37,3 +37,12 @@ foreach ($routes as $route) {
         $action = $route['action'];
     }
 }
+
+/*  Если action не определён, то  выкидваем кастомную 404,
+ это надо если человек захочет ввести несанкционированые данные*/
+
+if (empty($action)) {
+    http_response_code(404);
+    require __DIR__ . '/views/404.php';
+    die;
+}
