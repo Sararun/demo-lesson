@@ -1,9 +1,9 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1); //Введение строгой типизации
 error_reporting(-1);
 session_start();
-require __DIR__ . 'functions/function.php'; //Контроллер
+require __DIR__ . '/functions/function.php'; // Ввод исполняющего файла
 
 $url = $_SERVER['REQUEST_URI'];
 $parser = parse_url($url);
