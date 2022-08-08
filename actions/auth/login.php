@@ -13,3 +13,6 @@ if (!empty($_POST) && ($_POST['mode'] === 'login_user')) {
         $errors['email_not_valid'] = $massages['auth']['email_not_valid']['message'];
     }
 
+    if (empty($data['password'])) {
+        $errors['empty_password'] = $massages['auth']['empty_password']['message'];
+    }
