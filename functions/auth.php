@@ -25,3 +25,18 @@ function login(array $data): array
 
     return ($flag) ? $result : ['incorrect_login_password'] ;
 }
+
+//контроллер логики ошибок связанных с неправильным заполнением полей юзером
+function validateUserData(array $data): ?array
+{
+    $userError = checkUsername($data['username']);
+    $emailError = checkEmail($data['email']);
+    $passwordError = checkPasswordData($data['password']);
+
+    // По факту мы смотрим, если хоть один есть
+    if(!is_null($userError) || !is_null($emailError) || !is_null($passwordError)){
+        $string = "{$userError}, {$emailError}, {$passwordError}";
+        return array_diff(explode(', ',$string), [null, '']);
+    }
+    return null;
+}
