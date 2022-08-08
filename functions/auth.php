@@ -80,6 +80,17 @@ function checkUserName(string $username): ?string
     }
 
     return null;
+}
 
+
+function existsEmail(string $email): bool
+{
+    $query = "SELECT `id` FROM users WHERE email=:email LIMIT 1";
+    $sth = connect()->prepare($query);
+    $sth->execute([':email' => $email]);
+    $result = $sth->rowCount();
+
+
+    return (bool)$result;
 }
 
