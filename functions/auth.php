@@ -40,3 +40,46 @@ function validateUserData(array $data): ?array
     }
     return null;
 }
+
+function checkEmail(string $email): ?string
+{
+    if (empty ($email)){
+        return 'empty_email';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        return 'email_not_valid';
+    } elseif (existsEmail($email)){
+        return 'email_taken';
+    }
+    return null;
+}
+
+function checkPasswordData(string $password): ?string
+{
+    if (empty($password)) {
+        return 'empty_password';
+    } elseif (preg_match('#^\d+$#', $password)) {
+        return 'is_not_number_password';
+    } elseif (!preg_match('#[A-Z]#', $password)) {
+        return 'not_capitalized';
+    } elseif (strlen($password) <= 5) {
+        return 'short_password';
+    }
+
+    return null;
+}
+
+function checkUserName(string $username): ?string
+{
+    $pattern = "#[^а-яёa-z]#ui";
+    if (empty($username)) {
+        return 'empty_user';
+    } elseif (preg_match($pattern, $username)) {
+        return 'username_not_valid';
+    } elseif (mb_strlen($username) < 3) {
+        return 'username_short';
+    }
+
+    return null;
+
+}
+
