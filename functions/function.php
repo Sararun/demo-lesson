@@ -54,3 +54,15 @@ function render(string $path, array $data = [])
     require $viewpath;
     return ob_get_clean();
 }
+
+function redirect(string $http = ''): void
+{
+    if ($http) {
+        $redirect = $http;
+    } else {
+        $redirect = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
+    }
+
+    header("Location: {$redirect}");
+    die;
+}
