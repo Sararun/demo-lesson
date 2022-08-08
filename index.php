@@ -27,3 +27,13 @@ $routes = [
     ]
 ];
 
+$view = '';
+$action = '';
+
+// цикл приравнивает значение к переменным отталкиваясь от регулярки
+foreach ($routes as $route) {
+    if (preg_match($route['url'], $url, $matches)) {
+        $view = $route['view'];
+        $action = $route['action'];
+    }
+}
