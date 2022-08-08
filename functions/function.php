@@ -66,3 +66,18 @@ function redirect(string $http = ''): void
     header("Location: {$redirect}");
     die;
 }
+
+function cleanData($data)
+{
+    unset($data['mode']);
+
+    if (is_array($data)) {
+        foreach ($data as $k => $v) {
+            $data[$k] = htmlspecialchars(strip_tags(trim($v)));
+        }
+    } else {
+        $data = htmlspecialchars(strip_tags(trim($data)));
+    }
+    dump($data);die;
+    return $data;
+}
