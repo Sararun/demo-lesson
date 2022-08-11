@@ -22,6 +22,10 @@ return [
             'key' => 'success',
             'message' => 'Успешно авторизованы.',
         ],
+        'success_logout' => [
+            'key' => 'success',
+            'message' => 'Вы вышли из системы.',
+        ],
         'error_registry' => [
             'key' => 'error',
             'message' => 'Ошибка регистрации.',
