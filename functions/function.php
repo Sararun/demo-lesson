@@ -113,3 +113,15 @@ function rusTranslit($str)
     ];
     return strtr($str, $arr);
 }
+
+function getTranslate($str)
+{
+    //переводит в транслит
+    $str = rusTranslit($str);
+    //заменяет все ненужное нам на "-"
+    $str = preg_replace('~[^-a-z0-9_]+~u', '-', $str);
+    //удаляет начальные и конечные '-'
+    $str = trim($str, '-');
+    return $str;
+}
+
