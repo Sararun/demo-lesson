@@ -2,23 +2,24 @@
 
 require __DIR__ . '/../../functions/auth.php';
 
-if (!empty($_POST) && ($_POST['mode'] === 'login_user')) {
-    $data = cleanData($_POST);
+if (!empty($_POST) && ($_POST['mode'] === 'add_category')) {
 
-    $result = login($data);
+    $category = cleanData($_POST);
 
-    if (!empty($result['empty_email']) || !empty($result['empty_password']) || !empty($result['incorrect_login_password'])) {
-        foreach ($result as $key => $value) {
-            $_SESSION['any'][$key] = $massages['auth'][$key]['message'];
-        }
-        $redirect = '';
-    } else {
-        $_SESSION['user'] = $result;
-        $_SESSION['success'] = $massages['auth']['success']['message'];
-        $redirect = '/';
+    //сделать проверку на пустоту name
+    //сделать проверку на кол-во символов не более 100
+    //вывести сообщения об ошибках на клиента
+
+    $slug = getTranslate($category['name']);
+    $params = ['slug' => $slug, 'name' => $category['name']];
+
+    if (!empty($category['is_active'])) {
+        $params['is_active'] = 1;
     }
 
-    redirect($redirect);
+    if (insert('categories', $params)) {
+        $_SESSION['success'] = $massages['add'];
+        redirect('/admin/categories');
+    }
 }
-
 $content = render($view);
