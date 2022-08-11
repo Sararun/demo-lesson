@@ -39,6 +39,14 @@ function login(array $data): array
     return $errors ?? $user;
 }
 
+function logout()
+{
+    $_SESSION['user'] = false;
+    unset($_SESSION['user']);
+    session_destroy();
+    redirect();
+}
+
 //контроллер логики ошибок связанных с неправильным заполнением полей юзером
 function validateUserData(array $data): ?array
 {
