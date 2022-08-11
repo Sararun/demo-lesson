@@ -10,10 +10,10 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Регистрация</a>
+                    <a class="nav-link" href="../../../index.php">Регистрация</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Вход</a>
+                    <a class="nav-link" href="../../../index.php">Вход</a>
                 </li>
             </ul>
             <form class="d-flex">
