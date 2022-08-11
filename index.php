@@ -9,23 +9,7 @@ $url = $_SERVER['REQUEST_URI'];
 $parser = parse_url($url);
 $url = trim($parser['path'], '/');
 
-$routes = [
-    [
-        'url' => '#^$|^\?#',
-        'view' => 'sites/index',
-        'action' => 'sites/index',
-    ],
-    [
-        'url' => '#^register?#',
-        'view' => 'auth/register',
-        'action' => 'auth/register',
-    ],
-    [
-        'url' => '#^login?#i',
-        'view' => 'auth/login',
-        'action' => 'auth/login',
-    ]
-];
+$routes = require __DIR__ . '/config/routes.php';
 
 $view = '';
 $action = '';
