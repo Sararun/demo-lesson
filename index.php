@@ -30,7 +30,12 @@ if (empty($action)) {
     require __DIR__ . '/views/404.php';
     die;
 }
-
+dump($action);
 $massages = require __DIR__ . '/config/massages.php';
 require __DIR__ . "/actions/{$action}.php";
-require __DIR__ . '/views/layouts/default.php'; //Подтягивание вёрстки
+
+if (!preg_match('#^backend#', $action)) {
+    //require __DIR__ . '/views/layouts/default.php';
+} else {
+    require __DIR__ . '/views/layouts/admin.php';
+}
