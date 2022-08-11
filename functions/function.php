@@ -50,8 +50,8 @@ function render(string $path, array $data = [])
     }
 
     $viewpath = __DIR__ . "/../views/{$path}.php";
-
     ob_start();
+
     if (!file_exists($viewpath)) {
         http_response_code(404);
         require __DIR__ . '/../views/4040.php';
@@ -59,6 +59,7 @@ function render(string $path, array $data = [])
     }
 
     require $viewpath;
+
     return ob_get_clean();
 }
 
@@ -87,4 +88,28 @@ function cleanData($data)
     }
     dump($data);die;
     return $data;
+}
+
+//транслитерация
+function rusTranslit($str)
+{
+    $str = mb_strtolower($str);
+
+    $arr = [
+        'а' => 'a', 'б' => 'b', 'в' => 'v',
+        'г' => 'g', 'д' => 'd', 'е' => 'e',
+        'ё' => 'e', 'ж' => 'zh', 'з' => 'z',
+        'и' => 'i', 'й' => 'y', 'к' => 'k',
+        'л' => 'l', 'м' => 'm', 'н' => 'n',
+        'о' => 'o', 'п' => 'p', 'р' => 'r',
+        'с' => 's', 'т' => 't', 'у' => 'u',
+        'ф' => 'f', 'х' => 'h', 'ц' => 'c',
+        'ч' => 'ch', 'ш' => 'sh', 'щ' => 'sch',
+        'ь' => '', 'ы' => 'y', 'ъ' => '',
+        'э' => 'e', 'ю' => 'yu', 'я' => 'ya',
+        '(' => '', ')' => '', '\'' => '',
+        '"' => '', '.' => '', '+' => '',
+        '[' => '', ']' => '',
+    ];
+    return strtr($str, $arr);
 }
