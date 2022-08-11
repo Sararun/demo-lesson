@@ -93,7 +93,7 @@ function cleanData($data)
 //транслитерация
 function rusTranslit($str)
 {
-    $str = mb_strtolower($str);
+    $str = mb_strtolower($str); // Переделка в нижний регистр
 
     $arr = [
         'а' => 'a', 'б' => 'b', 'в' => 'v',
