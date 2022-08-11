@@ -11,19 +11,32 @@ function register(array $data): string
 
 function login(array $data): array
 {
-    $dbh = connect();
-    $query = "SELECT * FROM users WHERE email=:email LIMIT 1";
-    $sth = $dbh->prepare($query);
-    $sth->execute([':email' => $data['email']]);
-    $result = $sth->fetch();
-
-    if (!empty($result) && password_verify($data['password'], $result['password'])) {
-        $flag = true;
-    } else {
-        $flag = false;
+    $errors = null;
+    if (empty($data['email'])){
+        $errors['empty_email'] = 'empty_email';
     }
 
-    return ($flag) ? $result : ['incorrect_login_password'] ;
+    if (empty($data['password'])){
+        $errors['empty_password'] = 'empty_password';
+    }
+
+    $user = null;
+    if(empty($errors)) {
+        $dbh = connect();
+        $query = "SELECT * FROM users WHERE email=:email LIMIT 1";
+        $sth = $dbh->prepare($query);
+        $sth->execute([':email' => $data['email']]);
+        $user = $sth->fetch();
+
+        if (empty($user)) {
+            $errors['incorrect_login_password'] = 'incorrect_login_password';
+        } else {
+            if (!password_verify($data['password'], $user['password'])) {
+                $errors['incorrect_login_password'] = 'incorrect_login_password';
+            }
+        }
+    }
+    return $errors ?? $user;
 }
 
 //контроллер логики ошибок связанных с неправильным заполнением полей юзером
