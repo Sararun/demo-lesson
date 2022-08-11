@@ -35,7 +35,9 @@ $massages = require __DIR__ . '/config/massages.php';
 require __DIR__ . "/actions/{$action}.php";
 
 if (!preg_match('#^backend#', $action)) {
-    //require __DIR__ . '/views/layouts/default.php';
+    require __DIR__ . '/views/layouts/default.php';
 } else {
     require __DIR__ . '/views/layouts/admin.php';
 }
+
+
