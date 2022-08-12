@@ -60,7 +60,7 @@ return [
         ],
         'not_capitalized' => [
             'key' => 'error',
-            'message' => 'Пароль должен содержать хотябы одну заглавную букву.',
+            'message' => 'Пароль должен содержать хотя бы одну заглавную букву.',
         ],
         'incorrect_login_password' => [
             'key' => 'error',

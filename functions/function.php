@@ -54,7 +54,7 @@ function render(string $path, array $data = [])
 
     if (!file_exists($viewpath)) {
         http_response_code(404);
-        require __DIR__ . '/../views/4040.php';
+        require __DIR__ . '/../views/404.php';
         die;
     }
 
@@ -86,7 +86,7 @@ function cleanData($data)
     } else {
         $data = htmlspecialchars(strip_tags(trim($data)));
     }
-    dump($data);die;
+
     return $data;
 }
 

@@ -19,6 +19,7 @@ foreach ($routes as $route) {
     if (preg_match($route['url'], $url, $matches)) {
         $view = $route['view'];
         $action = $route['action'];
+        break;
     }
 }
 
@@ -30,7 +31,7 @@ if (empty($action)) {
     require __DIR__ . '/views/404.php';
     die;
 }
-dump($action);
+
 $massages = require __DIR__ . '/config/massages.php';
 require __DIR__ . "/actions/{$action}.php";
 

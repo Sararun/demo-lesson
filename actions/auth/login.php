@@ -15,7 +15,7 @@ if (!empty($_POST) && ($_POST['mode'] === 'login_user')) {
         $redirect = '';
     } else {
         $_SESSION['user'] = $result;
-        $_SESSION['success'] = $massages['auth']['success']['message'];
+        $_SESSION['success'] = $massages['auth']['success_login']['message'];
         $redirect = '/';
     }
 
