@@ -9,12 +9,12 @@ if (!empty($_POST) && ($_POST['mode'] === 'add_user')) {
 
     if ($errors) {
         foreach ($errors as $key => $value) {
-            $msgArray = $massages['auth'][$value];
+            $msgArray = $messages['auth'][$value];
             $_SESSION['any'][] = $msgArray['message'];
         }
     } else {
         $result = register($data);
-        $message = $massages['auth'][$result];
+        $message = $messages['auth'][$result];
         $_SESSION[$message['key']] = $message['message'];
     }
     redirect();
