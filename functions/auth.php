@@ -12,16 +12,16 @@ function register(array $data): string
 function login(array $data): array
 {
     $errors = null;
-    if (empty($data['email'])){
+    if (empty($data['email'])) {
         $errors['empty_email'] = 'empty_email';
     }
 
-    if (empty($data['password'])){
+    if (empty($data['password'])) {
         $errors['empty_password'] = 'empty_password';
     }
 
     $user = null;
-    if(empty($errors)) {
+    if (empty($errors)) {
         $dbh = connect();
         $query = "SELECT * FROM users WHERE email=:email LIMIT 1";
         $sth = $dbh->prepare($query);
@@ -55,20 +55,20 @@ function validateUserData(array $data): ?array
     $passwordError = checkPasswordData($data['password']);
 
     // По факту мы смотрим, если хоть один есть
-    if(!is_null($userError) || !is_null($emailError) || !is_null($passwordError)){
+    if (!is_null($userError) || !is_null($emailError) || !is_null($passwordError)) {
         $string = "{$userError}, {$emailError}, {$passwordError}";
-        return array_diff(explode(', ',$string), [null, '']);
+        return array_diff(explode(', ', $string), [null, '']);
     }
     return null;
 }
 
 function checkEmail(string $email): ?string
 {
-    if (empty ($email)){
+    if (empty ($email)) {
         return 'empty_email';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return 'email_not_valid';
-    } elseif (existsEmail($email)){
+    } elseif (existsEmail($email)) {
         return 'email_taken';
     }
     return null;
@@ -110,7 +110,6 @@ function existsEmail(string $email): bool
     $sth = connect()->prepare($query);
     $sth->execute([':email' => $email]);
     $result = $sth->rowCount();
-
 
     return (bool)$result;
 }
