@@ -10,25 +10,25 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <?php if (empty($_SESSION['user'])): ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Регистрация</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Вход</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Вход</a>
+                    </li>
                 <?php else: ?>
-                <?php if (empty($_SESSION['user']) && ($_SESSION['user']['is_admin'] == 3)): ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">Линый кабинет</a>
-                </li>
-                <?php else: ?>
+                    <?php if (empty($_SESSION['user']) && ($_SESSION['user']['is_admin'] == 3)): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Линый кабинет</a>
+                        </li>
+                    <?php else: ?>
                         <li class="nav-item">
                             <a class="nav-link" href="/admin">Панель управления</a>
                         </li>
-                <?php endif; ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout?logout=1">Выход</a>
-                </li>
+                    <?php endif; ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout?logout=1">Выход</a>
+                    </li>
                 <?php endif; ?>
             </ul>
             <form class="d-flex">
