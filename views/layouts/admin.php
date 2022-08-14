@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-    <?php require __DIR__ . '/../backend/blocks/_top-menu.php' ?>
+    <?php require __DIR__ . '/../backend/blocks/_top-menu.php'; ?>
 
     <?php require __DIR__ . '/../block/_alert.php'; ?>
 
