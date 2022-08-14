@@ -31,12 +31,14 @@ function connect(): \PDO
     }
 }
 
-function insert(array $data): int
+function insert(string $tableName, array $data): int
 {
     $fields = implode(', ', array_keys($data));
     $placeholders = str_repeat('?, ', count($data) - 1) . '?';
+
     $dbh = connect();
-    $query = "INSERT INTO users ({$fields}) VALUE ({$placeholders})";
+    $query = "INSERT INTO `{$tableName}` ({$fields}) VALUE ({$placeholders})";
+
     $sth = $dbh->prepare($query);
     $sth->execute(array_values($data));
 
