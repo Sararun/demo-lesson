@@ -9,36 +9,35 @@
             <div class="text-end">
                 <a href="/admin/categories/create" class="btn btn-primary" role="button">Добавить</a>
             </div>
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                </tbody>
-            </table>
+            <?php if (!empty($categories)): ?>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($categories as $value): ?>
+                        <tr>
+                            <th scope="row"><?php echo $value['id']; ?></th>
+                            <td><?php echo $value['slug']; ?></td>
+                            <td>
+                                <a href="/admin/categories/update?id=<?php echo $value['id']; ?>"><?php echo $value['name']; ?></a>
+                            </td>
+                            <td>
+                                <a href="/admin/categories/update?id=<?php echo $value['id']; ?>" class="btn btn-primary" role="button">Update</a>
+                                <a href="/admin/categories/delete?id=<?php echo $value['id']; ?>" class="btn btn-danger" role="button">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>Категорий нет</p>
+            <?php endif; ?>
         </div>
     </div>
 </div>
