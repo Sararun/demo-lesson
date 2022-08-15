@@ -1,6 +1,7 @@
 <?php
 
 //подключить файл категории функциии
+require __DIR__ . '/../../../functions/categories.php';
 
 if (!empty($_POST) && ($_POST['mode'] === 'add_category')) {
 
