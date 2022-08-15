@@ -1,11 +1,17 @@
 <?php
+//подключить файл категории функциии
 
-if (!empty($_POST) && ($_POST['mode'] === 'update_categories')) {
+if (!empty($_POST) && ($_POST['mode'] === 'update_category')) {
+
     $category = cleanData($_POST);
-    $redirect = '/admin/categories/create';
 
+    //сделать по аналогии как авторизация и регистрация
+    //то есть переписать в функции которое добавлить в файл categories.php folder function
+
+    $redirect = '/admin/categories/create';
     if (empty($category['name'])) {
         $_SESSION['error'] = $messages['categories']['empty_name']['message'];
+
     } elseif (mb_strlen($category['name']) > 100) {
         $_SESSION['error'] = $messages['categories']['big_name']['message'];
     } else {
@@ -23,12 +29,25 @@ if (!empty($_POST) && ($_POST['mode'] === 'update_categories')) {
             $redirect = '/admin/categories';
         }
     }
+
     redirect($redirect);
 }
 
 $id = $_GET['id'] ?? null;
 
 if (empty($id)) {
+    http_response_code(404);
+    require __DIR__ . '/../../../views/404.php';
+    die;
+}
+
+$query = "SELECT * FROM `categories` WHERE id=:id LIMIT 1";
+$dbh = connect();
+$sth = $dbh->prepare($query);
+$sth->execute([':id' => $id]);
+$category = $sth->fetch();
+
+if (empty($category)) {
     http_response_code(404);
     require __DIR__ . '/../../../views/404.php';
     die;
