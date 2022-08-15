@@ -1,22 +1,17 @@
 <?php
 
-require __DIR__ . '/../../../functions/auth.php';
+//подключить файл категории функциии
 
 if (!empty($_POST) && ($_POST['mode'] === 'add_category')) {
 
-
     $category = cleanData($_POST);
-
     //сделать по аналогии как авторизация и регистрация
     //то есть переписать в функции которое добавлить в файл categories.php folder function
 
-    $redirect = 'admin/categories/create';
-
-    //  Если имя категории не введено
+    $redirect = '/admin/categories/create';
     if (empty($category['name'])) {
         $_SESSION['error'] = $messages['categories']['empty_name']['message'];
 
-        //  Если имя категории длиннее 100 символов
     } elseif (mb_strlen($category['name']) > 100) {
         $_SESSION['error'] = $messages['categories']['big_name']['message'];
     } else {
@@ -32,6 +27,8 @@ if (!empty($_POST) && ($_POST['mode'] === 'add_category')) {
             $redirect = '/admin/categories';
         }
     }
-
+    dump($_SESSION['success']);
+    redirect($redirect);
 }
+
 $content = render($view);
