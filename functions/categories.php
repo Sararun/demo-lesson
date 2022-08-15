@@ -1,6 +1,7 @@
 <?php
 function create() {
-    if (!empty($_POST) && ($_POST['mode'] === 'add_category')) {
+    if (!empty($_POST) && ($_POST['mode'] === 'add_category'))
+    {
 
         $category = cleanData($_POST);
         //сделать по аналогии как авторизация и регистрация
