@@ -15,16 +15,17 @@ function connect(): \PDO
         if (!is_null($dbh)) {
             return $dbh;
         }
+
         $dbh = new \PDO(
-            'mysql:host=localhost;dbname=db-shop-lesson;charset=utf8',
-            'root',
-            'root',
-            [
+            "mysql:host=localhost;dbname=db-shop-lesson;charset=utf8",
+            "root",
+            "root", [
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                 \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
                 \PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
             ]
         );
+
         return $dbh;
     } catch (\PDOException $e) {
         die ("Ошибка подключения к бд {$e->getMessage()}");
@@ -57,9 +58,10 @@ function update(string $tableName, array $data): bool
         $values[":{$key}"] = $value;
     }
 
-    $query = "UPDATE `{$tableName}` SET"
+    $query = "UPDATE `{$tableName}` SET "
         . implode(', ', $columns)
-        . "WHERE `id`=:id LIMIT 1";
+        . " WHERE `id`=:id LIMIT 1";
+
     $dbh = connect();
     $sth = $dbh->prepare($query);
     $sth->execute($values);
@@ -73,21 +75,20 @@ function render(string $path, array $data = [])
     if (is_array($data)) {
         extract($data);
     }
-
-    $viewpath = __DIR__ . "/../views/{$path}.php";
+    $viewPath = __DIR__ . "/../views/{$path}.php";
     ob_start();
 
-    if (!file_exists($viewpath)) {
+    if (!file_exists($viewPath)) {
         http_response_code(404);
         require __DIR__ . '/../views/404.php';
         die;
     }
-
-    require $viewpath;
+    require $viewPath;
 
     return ob_get_clean();
 }
 
+//редирект
 function redirect(string $http = ''): void
 {
     if ($http) {
@@ -115,10 +116,15 @@ function cleanData($data)
     return $data;
 }
 
+function isEmail(string $email): bool
+{
+    return (bool)filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
 //транслитерация
 function rusTranslit($str)
 {
-    $str = mb_strtolower($str); // Переделка в нижний регистр
+    $str = mb_strtolower($str);
 
     $arr = [
         'а' => 'a', 'б' => 'b', 'в' => 'v',
@@ -149,4 +155,3 @@ function getTranslate($str)
     $str = trim($str, '-');
     return $str;
 }
-
