@@ -17,6 +17,8 @@ if (!empty($_POST) && ($_POST['mode'] === 'add_user')) {
         $message = $messages['auth'][$result];
         $_SESSION[$message['key']] = $message['message'];
     }
+
     redirect();
 }
+
 $content = render($view, []);
