@@ -3,7 +3,7 @@
 //подключить файл категории функциии
 
 $dbh = connect();
-$query = "SELECT * FROM `categories` ORDER BY di DESC";
+$query = "SELECT * FROM `categories` ORDER BY id DESC";
 $sth = $dbh->prepare($query);
 $sth->execute();
 $categories = $sth->fetchAll();
