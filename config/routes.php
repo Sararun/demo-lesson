@@ -30,19 +30,18 @@ return [
         'action' => 'backend/categories/create',
     ],
     [
-        'url' => '#^admin/categories?#i',
-        'view' => 'backend/categories/index',
-        'action' => 'backend/categories/index',
-    ],
-    [
         'url' => '#^admin/categories/update?#i',
         'view' => 'backend/categories/update',
         'action' => 'backend/categories/update',
+    ],
+    [
+        'url' => '#^admin/categories?#i',
+        'view' => 'backend/categories/index',
+        'action' => 'backend/categories/index',
     ],
     [
         'url' => '#^admin?#i',
         'view' => 'backend/sites/index',
         'action' => 'backend/sites/index',
     ],
-
 ];
