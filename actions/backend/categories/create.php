@@ -27,7 +27,6 @@ if (!empty($_POST) && ($_POST['mode'] === 'add_category')) {
             $redirect = '/admin/categories';
         }
     }
-    dump($_SESSION['success']);
     redirect($redirect);
 }
 

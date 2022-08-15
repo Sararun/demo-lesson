@@ -33,7 +33,7 @@ if (empty($action)) {
     die;
 }
 
-$massages = require __DIR__ . '/config/massages.php';
+$massages = require __DIR__ . '/config/messages.php';
 require __DIR__ . "/actions/{$action}.php";
 
 if (!preg_match('#^backend#', $action)) {
