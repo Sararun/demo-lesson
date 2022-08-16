@@ -9,7 +9,7 @@
             <div class="text-end">
                 <a href="/admin/categories" class="btn btn-primary" role="button">Назад</a>
             </div>
-            <div class="m-auto"> Вы точно хотите удалить жто поле</div>
+            <div class="m-auto"> Вы точно хотите удалить это поле</div>
 
             <form method="post">
                 <div class="mb-3">
