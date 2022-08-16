@@ -11,7 +11,7 @@ if (!empty($_POST) && ($_POST['mode'] === 'delete_category')) {
 
     if (returnTrueId($data['id'])) {
 
-        deleteCategory($data);
+
     }
 
 
