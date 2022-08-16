@@ -44,4 +44,9 @@ return [
         'view' => 'backend/sites/index',
         'action' => 'backend/sites/index',
     ],
+    [
+        'url' => '#^admin/categories/delete?#i',
+        'view' => 'backend/categories/delete',
+        'action' => 'backend/categories/delete',
+    ],
 ];
