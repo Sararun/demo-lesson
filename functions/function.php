@@ -167,3 +167,17 @@ function getTranslate($str)
     $str = trim($str, '-');
     return $str;
 }
+
+function returnTrueId($id): bool
+{
+    $dbh = connect();
+    $query = "
+            SELECT id FROM `categories`
+            WHERE id=:id
+        ";
+
+    $sth = $dbh->prepare($query);
+    $sth->execute([":id" => $id]);
+
+    return (bool)$sth->rowCount();
+}
