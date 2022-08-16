@@ -46,6 +46,29 @@ function insert(string $tableName, array $data): int
     return (int)$dbh->lastInsertId();
 }
 
+function update(string $tableName, array $data): bool
+{
+    $columns = [];
+    $values = [':id' => $data['id']];
+    foreach ($data as $key => $value) {
+        if ($key == 'id') {
+            continue;
+        }
+        $columns[] = "{$key}=:{$key}";
+        $values[":{$key}"] = $value;
+    }
+
+    $query = "UPDATE `{$tableName}` SET "
+        . implode(', ', $columns)
+        . " WHERE `id`=:id LIMIT 1";
+
+    $dbh = connect();
+    $sth = $dbh->prepare($query);
+    $sth->execute($values);
+    $result = $sth->rowCount();
+
+    return (bool)$result;
+}
 
 function render(string $path, array $data = [])
 {
@@ -97,6 +120,18 @@ function isEmail(string $email): bool
 {
     return (bool)filter_var($email, FILTER_VALIDATE_EMAIL);
 }
+
+function checkTableName(string $tableName, string $column, string $value): bool
+{
+    $dbh = connect();
+    $query = "SELECT id FROM {$tableName} WHERE {$column}=:{$column} LIMIT 1";
+    $sth = $dbh->prepare($query);
+    $sth->execute([":{$column}" => $value]);
+    $result = $sth->rowCount();
+
+    return (bool)$result;
+}
+
 
 //транслитерация
 function rusTranslit($str)
