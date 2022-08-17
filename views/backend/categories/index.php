@@ -16,6 +16,7 @@
                         <th scope="col">#</th>
                         <th scope="col">URL</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Handle</th>
                     </tr>
                     </thead>
@@ -27,6 +28,7 @@
                             <td>
                                 <a href="/admin/categories/update?id=<?php echo $value['id']; ?>"><?php echo $value['name']; ?></a>
                             </td>
+                            <td><?php echo ($value['is_active']) ? 'yes' : 'no'; ?></td>
                             <td>
                                 <a href="/admin/categories/update?id=<?php echo $value['id']; ?>" class="btn btn-primary" role="button">Update</a>
                                 <a href="/admin/categories/delete?id=<?php echo $value['id']; ?>" class="btn btn-danger" role="button">Delete</a>
