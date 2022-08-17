@@ -24,9 +24,9 @@ function getProducts(): ?array
 
 function validateProductData(array $data): ?string
 {
-    if (empty($data['name'])) {
+    if (empty($data['title'])) {
         return 'empty_name';
-    } elseif (mb_strlen($data['name']) > 100) {
+    } elseif (mb_strlen($data['title']) > 100) {
         return 'big_name';
     }
 
