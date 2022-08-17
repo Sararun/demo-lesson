@@ -28,7 +28,7 @@
                     <input id="price" name="price" value="" type="text" class="form-control">
                 </div>
                 <div class="col-md-3">
-                    <label for="quantity" class="form-label">Количество</label>
+                    <label for="quantity" class="form-label">Quantity</label>
                     <input id="quantity" name="quantity" value="" type="text" class="form-control">
                 </div>
 
