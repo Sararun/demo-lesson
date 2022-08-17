@@ -1,14 +1,9 @@
 <?php
 
-//подключить файл категории функциии
+require __DIR__ . '/../../../functions/categories.php';
 
-$dbh = connect();
-$query = "SELECT * FROM `categories` ORDER BY id DESC";
-$sth = $dbh->prepare($query);
-$sth->execute();
-$categories = $sth->fetchAll();
+$categories = getCategories();
 
 $content = render($view, [
     'categories' => $categories,
 ]);
-
