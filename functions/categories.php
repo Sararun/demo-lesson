@@ -51,3 +51,10 @@ function updateCategory(array $data): bool
 
     return $result;
 }
+
+function deleteCategory(int $id): bool
+{
+    $result = delete('categories', $id);
+
+    return $result;
+}
