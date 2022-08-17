@@ -28,6 +28,12 @@ function validateProductData(array $data): ?string
         return 'empty_name';
     } elseif (mb_strlen($data['title']) > 100) {
         return 'big_name';
+    } elseif (empty($data['price'])) {
+        return 'empty_price';
+    } elseif (empty($data['quantity'])) {
+        return 'empty_quantity';
+    } elseif (empty($data['date'])) {
+        return 'empty_date';
     }
 
     return null;
