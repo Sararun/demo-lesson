@@ -70,6 +70,17 @@ function update(string $tableName, array $data): bool
     return (bool)$result;
 }
 
+function delete(string $tableName, int $id): bool
+{
+    $dbh = connect();
+    $query = "DELETE FROM {$tableName} WHERE id=:id LIMIT 1";
+    $sth = $dbh->prepare($query);
+    $sth->execute([':id' => $id]);
+    $result = $sth->rowCount();
+
+    return (bool)$result;
+}
+
 function render(string $path, array $data = [])
 {
     if (is_array($data)) {
@@ -103,7 +114,9 @@ function redirect(string $http = ''): void
 
 function cleanData($data)
 {
-    unset($data['mode']);
+    if (isset($data['mode'])) {
+        unset($data['mode']);
+    }
 
     if (is_array($data)) {
         foreach ($data as $k => $v) {
@@ -168,16 +181,19 @@ function getTranslate($str)
     return $str;
 }
 
-function returnTrueId($id): bool
+function getCategories(bool $isActive = false): ?array
 {
+    $where = "WHERE 1";
+    if ($isActive) {
+        $where .= " AND `is_active`='1' ";
+    }
+
+    $query = "SELECT * FROM categories {$where} ORDER BY id DESC";
+
     $dbh = connect();
-    $query = "
-            SELECT id FROM `categories`
-            WHERE id=:id
-        ";
-
     $sth = $dbh->prepare($query);
-    $sth->execute([":id" => $id]);
+    $sth->execute();
+    $result = $sth->fetchAll();
 
-    return (bool)$sth->rowCount();
+    return ($result !== false) ? $result : null;
 }
