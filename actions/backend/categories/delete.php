@@ -2,17 +2,23 @@
 
 require __DIR__ . '/../../../functions/categories.php';
 
-if (!empty($_POST) && ($_POST['mode'] === 'delete_category')) {
+if (!empty($_GET['id'])) {
 
-    $data = cleanData($_POST);
-    $redirect = '/admin/categories/delete?id=' . $data['id'];
+    $id = cleanData($_GET['id']);
 
-    returnTrueId($data['id']);
+    $category = getOneCategory($id);
 
-    if (returnTrueId($data['id'])) {
-
-
+    if (empty($category)) {
+        http_response_code(404);
+        require __DIR__ . '/../../../views/404.php';
+        die;
     }
 
+    if (deleteCategory($id)) {
+        $_SESSION['success'] = $messages['delete'];
+    } else {
+        $_SESSION['error'] = $messages['delete_error'];
+    }
 
+    redirect();
 }
