@@ -60,7 +60,7 @@ return [
         ],
         'not_capitalized' => [
             'key' => 'error',
-            'message' => 'Пароль должен содержать хотябы одну заглавную букву.',
+            'message' => 'Пароль должен содержать хотя бы одну заглавную букву.',
         ],
         'incorrect_login_password' => [
             'key' => 'error',
@@ -75,7 +75,7 @@ return [
     'categories' => [
         'empty_name' => [
             'key' => 'error',
-            'message' => 'Введите название товара',
+            'message' => 'Введите название категории',
         ],
         'big_name' => [
             'key' => 'error',
@@ -85,6 +85,37 @@ return [
             'key' => 'error',
             'message' => 'Такая категория уже существует',
         ],
-    ]
+    ],
+    'products' => [
+    'empty_name' => [
+        'key' => 'error',
+        'message' => 'Введите название товара',
+    ],
+    'big_name' => [
+        'key' => 'error',
+        'message' => 'Кол-во символов не должно превышать 100',
+    ],
+    'slug_busy' => [
+        'key' => 'error',
+        'message' => 'Такой товар существует',
+    ],
+    'empty_price' => [
+        'key' => 'error',
+        'message' => 'Введите цену',
+    ],
+    'not_number' => [
+        'key' => 'error',
+        'message' => 'Введите числовую значение',
+    ],
+    'empty_quantity' => [
+        'key' => 'error',
+        'message' => 'Введите количество',
+    ],
+    'empty_date' => [
+        'key' => 'error',
+        'message' => 'Введите дату',
+    ],
+
+],
 ];
 
