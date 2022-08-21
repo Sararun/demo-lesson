@@ -197,3 +197,43 @@ function getCategories(bool $isActive = false): ?array
 
     return ($result !== false) ? $result : null;
 }
+
+function uploadFile($file): ?string
+{
+    $whiteList = ['jpg', 'jpeg', 'png'];//Расширение файлов
+    $errors = '';
+    $fileName = basename($file['name']);
+    $fileSize = $file['size'];
+    $tmpName = $file['tmp_name'];
+    $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    $fileErrors = $file['error'];
+    if ($fileErrors > 0) {
+        $errors .= 'Ошибка загрузки файла <br>';
+    }
+    if (!in_array($ext, $whiteList)) {
+        $errors .= 'Формат файла недопустимый <br>';
+    }
+    $limitSize = (1 * 1024 * 1024);
+    if ($fileSize > $limitSize) {
+        $errors .= 'Превышен допустимый размер файла <br>';
+    }
+    if(empty($errors)) {
+        $root = $_SERVER['DOCUMENT_ROOT'];
+        $dir = '/uploads/' . date('d-m-Y') . '/' . date('H') . '/';
+        $folders = explode('/', trim($dir, '/'));
+        chdir($root);
+        foreach ($folders as $folder) {
+            if (file_exists($folder)) {
+                chdir($folder);
+            } else {
+                mkdir($folder, 0755);
+                chdir($folder);
+            }
+        }
+        $filePath = $dir . uniqid('') . '.' . $ext;
+        if (move_upload_file($tmpName, $root, $filePath)) {
+            return $filePath;
+        }
+    }
+    return null;//Надо будет спросить, что возвращаю
+}
