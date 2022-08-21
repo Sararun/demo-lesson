@@ -10,6 +10,16 @@ function getOneProduct(int $id): ?array
 
     return ($result !== false) ? $result : null;
 }
+function getProducts(): ?array
+{
+    $dbh = connect();
+    $query = "SELECT * FROM products ORDER BY id DESC";
+    $sth = $dbh->prepare($query);
+    $sth->execute();
+    $result = $sth->fetchAll();
+
+    return ($result !== false) ? $result : null;
+}
 
 
 function validateProductData(array $data): ?string
@@ -20,8 +30,12 @@ function validateProductData(array $data): ?string
         return 'big_name';
     } elseif (empty($data['price'])) {
         return 'empty_price';
+    } elseif (!preg_match('#^\d+$#', $data['price'])) {
+        return 'not_number';
     } elseif (empty($data['quantity'])) {
         return 'empty_quantity';
+    } elseif (!preg_match('#^\d+$#', $data['quantity'])) {
+        return 'not_number';
     } elseif (empty($data['created_at'])) {
         return 'empty_date';
     }
@@ -87,13 +101,19 @@ function saveImage(int $id, string $filePath): bool
 
 function deleteProduct(int $id): bool
 {
-    $result = delete('products', $id);
+    if (delete('products', $id)) {
+        deleteImage($id);
 
-    return $result;
+        return true;
+    }
+
+    return false;
 }
-function deleteImage(int $id): bool
-{
-    $result = delete('product_images', $id);
 
-    return $result;
+function deleteImage(int $id): void
+{
+    $dbh = connect();
+    $query = "DELETE FROM product_images WHERE product_id=:id";
+    $sth = $dbh->prepare($query);
+    $sth->execute([':id' => $id]);
 }
