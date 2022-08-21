@@ -2,8 +2,8 @@
 
 function getOneProduct(int $id): ?array
 {
-    $query = "SELECT * FROM `products` WHERE id=:id LIMIT 1";
     $dbh = connect();
+    $query = "SELECT * FROM `products` WHERE id=:id LIMIT 1";
     $sth = $dbh->prepare($query);
     $sth->execute([':id' => $id]);
     $result = $sth->fetch();
@@ -11,16 +11,6 @@ function getOneProduct(int $id): ?array
     return ($result !== false) ? $result : null;
 }
 
-function getProducts(): ?array
-{
-    $dbh = connect();
-    $query = "SELECT * FROM products ORDER BY id DESC";
-    $sth = $dbh->prepare($query);
-    $sth->execute();
-    $result = $sth->fetchAll();
-
-    return ($result !== false) ? $result : null;
-}
 
 function validateProductData(array $data): ?string
 {
@@ -98,6 +88,12 @@ function saveImage(int $id, string $filePath): bool
 function deleteProduct(int $id): bool
 {
     $result = delete('products', $id);
+
+    return $result;
+}
+function deleteImage(int $id): bool
+{
+    $result = delete('product_images', $id);
 
     return $result;
 }
