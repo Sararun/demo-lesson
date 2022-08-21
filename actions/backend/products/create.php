@@ -9,22 +9,20 @@ if (!empty($_POST) && ($_POST['mode'] === 'add_product')) {
     $nameError = validateProductData($data);
 
     $redirect = '/admin/products/create';
-    if(!is_null($nameError))
-    {
+    if(!is_null($nameError)) {
         $_SESSION['error'] = $messages['products'][$nameError]['message'];
     } elseif (checkTableName('products', 'slug', getTranslate($data['title']))) {
         $_SESSION['error'] = $messages['products']['slug_busy']['message'];
-    } elseif (!is_int($data['price']) | !is_float($data['price'])) {
-        $_SESSION['error'] = $messages['products']['not_number']['message'];
-    } elseif (!is_int($data['quantity']) | !is_float($data['quantity'])) {
-        $_SESSION['error'] = $messages['products']['not_number']['message'];
-    }
-    elseif (createProduct($data)) {
+    } elseif ($id = createProduct($data)) {
+        $filePath = uploadFile($_FILES['thumbnail']);
+
+        saveImage($id, $filePath);
+
         $_SESSION['success'] = $messages['add'];
         $redirect = '/admin/products';
     }
-
     redirect($redirect);
+
 }
 
 $categories = getCategories(true);
