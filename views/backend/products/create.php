@@ -28,7 +28,7 @@
                     <input id="price" name="price" value="" type="text" class="form-control">
                 </div>
                 <div class="col-md-3">
-                    <label for="quantity" class="form-label">Quantity</label>
+                    <label for="quantity" class="form-label">Password</label>
                     <input id="quantity" name="quantity" value="" type="text" class="form-control">
                 </div>
 
@@ -40,6 +40,13 @@
                 <div class="col-md-2">
                     <label for="created_at" class="form-label">Date</label>
                     <input id="created_at" name="created_at" type="date" class="form-control">
+                </div>
+
+                <div class="col-12">
+                    <div class="input-group">
+                        <input id="thumbnail" name="thumbnail"  type="file" class="form-control" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <button id="thumbnail" class="btn btn-outline-secondary" type="button">Button</button>
+                    </div>
                 </div>
 
                 <div class="col-12">
