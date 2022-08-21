@@ -66,6 +66,7 @@ function updateProduct(array $data): bool
 {
     $slug = getTranslate($data['title']);
     $params = [
+        'id' => $data['id'],
         'category_id' => $data['category_id'],
         'slug' => $slug,
         'title' => $data['title'],
@@ -84,6 +85,14 @@ function updateProduct(array $data): bool
     $result = update('products', $params);
 
     return $result;
+}
+
+function saveImage(int $id, string $filePath): bool
+{
+    return insert('product_images', [
+        'product_id' => $id,
+        'thumbnail' => $filePath,
+    ]);
 }
 
 function deleteProduct(int $id): bool
