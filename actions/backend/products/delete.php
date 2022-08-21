@@ -14,7 +14,7 @@ if (!empty($_GET['id'])) {
         die;
     }
 
-    if (deleteProduct($id) && deleteImage($id)) {
+    if (deleteProduct($id)) {
         $_SESSION['success'] = $messages['delete'];
     } else {
         $_SESSION['error'] = $messages['delete_error'];
