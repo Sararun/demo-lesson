@@ -1,20 +1,20 @@
 <?php
 
-require __DIR__ . '/../../../functions/categories.php';
+require __DIR__ . '/../../../functions/products.php';
 
 if (!empty($_GET['id'])) {
 
     $id = cleanData($_GET['id']);
 
-    $category = getOneCategory($id);
+    $product = getOneProduct($id);
 
-    if (empty($category)) {
+    if (empty($product)) {
         http_response_code(404);
         require __DIR__ . '/../../../views/404.php';
         die;
     }
 
-    if (deleteCategory($id)) {
+    if (deleteProduct($id) && deleteImage($id)) {
         $_SESSION['success'] = $messages['delete'];
     } else {
         $_SESSION['error'] = $messages['delete_error'];
