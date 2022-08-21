@@ -231,7 +231,7 @@ function uploadFile($file): ?string
             }
         }
         $filePath = $dir . uniqid('') . '.' . $ext;
-        if (move_upload_file($tmpName, $root, $filePath)) {
+        if (move_uploaded_file($tmpName, $root . $filePath)) {
             return $filePath;
         }
     }
