@@ -32,7 +32,7 @@ function validateProductData(array $data): ?string
         return 'empty_price';
     } elseif (empty($data['quantity'])) {
         return 'empty_quantity';
-    } elseif (empty($data['date'])) {
+    } elseif (empty($data['created_at'])) {
         return 'empty_date';
     }
 
