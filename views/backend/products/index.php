@@ -15,6 +15,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Image</th>
+                        <th scope="col">Category</th>
                         <th scope="col">URL</th>
                         <th scope="col">Name</th>
                         <th scope="col">price</th>
@@ -34,9 +35,9 @@
                             <td>
                                 <a href="/admin/products/update?id=<?php echo $value['id']; ?>"><?php echo $value['title']; ?></a>
                             </td>
-                            <td><?php echo ($value['is_active']) ? 'yes' : 'no'; ?></td>
                             <td><?php echo $value['price']; ?></td>
                             <td><?php echo $value['quantity']; ?></td>
+                            <td><?php echo ($value['is_active']) ? 'yes' : 'no'; ?></td>
                             <td>
                                 <a href="/admin/products/update?id=<?php echo $value['id']; ?>" class="btn btn-primary" role="button">Update</a>
                                 <a href="/admin/products/delete?id=<?php echo $value['id']; ?>" class="btn btn-danger" role="button">Delete</a>
