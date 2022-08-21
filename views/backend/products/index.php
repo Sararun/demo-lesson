@@ -19,6 +19,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">price</th>
                         <th scope="col">quantity</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Handle</th>
                     </tr>
                     </thead>
@@ -33,6 +34,7 @@
                             <td>
                                 <a href="/admin/products/update?id=<?php echo $value['id']; ?>"><?php echo $value['title']; ?></a>
                             </td>
+                            <td><?php echo ($value['is_active']) ? 'yes' : 'no'; ?></td>
                             <td><?php echo $value['price']; ?></td>
                             <td><?php echo $value['quantity']; ?></td>
                             <td>
