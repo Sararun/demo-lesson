@@ -14,6 +14,7 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Image</th>
                         <th scope="col">URL</th>
                         <th scope="col">Name</th>
                         <th scope="col">price</th>
@@ -25,7 +26,10 @@
                     <?php foreach ($products as $value): ?>
                         <tr>
                             <th scope="row"><?php echo $value['id']; ?></th>
-                            <td><?php echo $value['slug']; ?></td>
+                            <td>
+                                <img src="<?php echo $value['images'][0]['thumbnail']; ?>";
+                            </td>
+                            <td><?= $value['slug'];?></td>
                             <td>
                                 <a href="/admin/products/update?id=<?php echo $value['id']; ?>"><?php echo $value['title']; ?></a>
                             </td>
